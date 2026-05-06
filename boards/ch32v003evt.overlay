@@ -1,0 +1,9 @@
+/ {
+    aliases {
+	 adc0 = &adc1;
+    };
+};
+
+&adc1 {
+  status = "okay";
+};
