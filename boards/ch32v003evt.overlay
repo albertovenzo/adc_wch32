@@ -1,9 +1,32 @@
+#include <zephyr/dt-bindings/adc/adc.h>
+
 / {
     aliases {
-	 adc0 = &adc1;
+        adc0 = &adc1;
+    };
+};
+
+&pinctrl {
+    adc_default: adc_default {
+        group1 {
+            pinmux = <ADC1_A2_PC4_0>;
+        };
     };
 };
 
 &adc1 {
-  status = "okay";
+    status = "okay";
+    pinctrl-0 = <&adc_default>;
+    pinctrl-names = "default";
+    
+    #address-cells = <1>;
+    #size-cells = <0>;
+
+    channel@2 {
+        reg = <0>;
+        zephyr,gain = "ADC_GAIN_1";
+        zephyr,reference = "ADC_REF_INTERNAL";
+        zephyr,acquisition-time = <ADC_ACQ_TIME_DEFAULT>;
+        zephyr,resolution = <10>;
+    };
 };
